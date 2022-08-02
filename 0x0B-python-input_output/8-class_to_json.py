@@ -1,9 +1,14 @@
 #!/usr/bin/python3
-""" returns the dictionary description with simple data structure """
+"""
+This file defines a function that
+returns the dictionary descp with
+simple data structure for json
+serialization of obj
+"""
 
 
 def class_to_json(obj):
-    dic1 = {}
-    if hasattr(obj, '__dict__'):
-        return obj.__dict__
-    return dic1
+    """
+    function that returns dict descp
+    """
+    return (obj.__dict__)

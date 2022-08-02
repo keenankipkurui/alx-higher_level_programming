@@ -1,63 +1,76 @@
 #!/usr/bin/python3
-""" class Square"""
-
-
+"""
+This module contains the class Square
+"""
 from models.rectangle import Rectangle
 
 
 class Square(Rectangle):
-    """ class Square"""
+    """
+    This class contains instantiation of the class
+    """
     def __init__(self, size, x=0, y=0, id=None):
-        """ class Square"""
+        """
+        This function is the instantiation of the
+        square class
+        """
         super().__init__(size, size, x, y, id)
 
     def __str__(self):
-        """ class Square"""
-        return ("[Square] ({}) {}/{} - {}".format(self.id, self.x,
-                self.y, self.width))
+        """
+        returns string representation of square
+        """
+        return ("[Square] ({}) {:d}/{:d} - {:d}".format
+                (self.id, self.x, self.y, self.width))
 
     @property
     def size(self):
-        """ class Square"""
-        return self.width
+        """
+        This function returns the size (width)
+        """
+        return (self.width)
 
     @size.setter
     def size(self, value):
-        """ class Square"""
-        if type(value) != int:
-            raise TypeError("width must be an integer")
-        if value <= 0:
-            raise ValueError("width must be > 0")
+        """
+        This function sets the size (width and height)
+        """
         self.width = value
         self.height = value
 
     def update(self, *args, **kwargs):
-        """ class Square"""
-        lenofargs = len(args)
-        if lenofargs > 0:
-            self.id = args[0]
-            lenofargs -= 1
-        if lenofargs > 0:
-            self.size = args[1]
-            lenofargs -= 1
-        if lenofargs > 0:
-            self.x = args[2]
-            lenofargs -= 1
-        if lenofargs > 0:
-            self.y = args[3]
-        if kwargs:
-            for key, value in kwargs.items():
-                if key == 'x':
-                    self.x = value
-                if key == 'y':
-                    self.y = value
-                if key == 'size':
-                    self.width = value
-                if key == 'id':
-                    self.id = value
+        """
+        This function assigns values and attributes
+        """
+        if len(args):
+            for i, j in enumerate(args):
+                if i == 0:
+                    self.id = j
+                if i == 1:
+                    self.size = j
+                if i == 2:
+                    self.x = j
+                if i == 3:
+                    self.y = j
+        else:
+            if "id" in kwargs:
+                self.id = kwargs["id"]
+            if "size" in kwargs:
+                self.size = kwargs["size"]
+            if "x" in kwargs:
+                self.x = kwargs["x"]
+            if "y" in kwargs:
+                self.y = kwargs["y"]
 
     def to_dictionary(self):
-        """ class Square"""
-        dic2 = {"id": self.id, "size": self.width,
-                "x": self.x, "y": self.y}
-        return dic2
+        """
+        This function contains the dictionary representation
+        of the square
+        """
+        sq = {}
+        sq["id"] = self.id
+        sq["size"] = self.size
+        sq["x"] = self.x
+        sq["y"] = self.y
+
+        return (sq)
