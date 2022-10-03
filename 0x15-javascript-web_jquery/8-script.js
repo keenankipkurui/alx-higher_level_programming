@@ -1,5 +1,12 @@
-$.get('http://swapi.co/api/films?format=json', (data) => {
-  for (let i = 0; i < data.results.length; i++) {
-    $('ul#list_movies').append('<li>' + data.results[i].title + '</li>');
-  }
+// JavaScript script that fetches and lists the title for all movies
+
+$(() => {
+  $.get('https://swapi-api.hbtn.io/api/films/?format=json', (data, textStatus) => {
+    if (textStatus === 'success') {
+      const films = data.results;
+      films.forEach(film => {
+        $('#list_movies').append('<li>' + film.title + '</li>');
+      });
+    }
+  });
 });

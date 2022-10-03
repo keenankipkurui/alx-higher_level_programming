@@ -1,23 +1,36 @@
 #!/usr/bin/node
-module.exports = class Rectangle {
+// class Rectangle that defines a rectangle
+
+class Rectangle {
   constructor (w, h) {
-    if (w <= 0 || h <= 0 || isNaN(w) || isNaN(h)) return;
-    this.width = w;
-    this.height = h;
+    if (w > 0 && h > 0) {
+      this.width = w;
+      this.height = h;
+    }
   }
 
-  print (char = 'X') {
-    for (let i = 0; i < this.height; i++) {
-      console.log(char.repeat(this.width));
+  print () {
+    let i, j, string;
+    for (i = 0; i < this.height; i++) {
+      string = '';
+      for (j = 0; j < this.width; j++) {
+        string += 'X';
+      }
+      console.log(string);
     }
   }
 
   rotate () {
-    [this.height, this.width] = [this.width, this.height];
+    let temp;
+    temp = this.height;
+    this.height = this.width;
+    this.width = temp;
   }
 
   double () {
-    this.height = this.height * 2;
-    this.width = this.width * 2;
+    this.height *= 2;
+    this.width *= 2;
   }
-};
+}
+
+module.exports = Rectangle;

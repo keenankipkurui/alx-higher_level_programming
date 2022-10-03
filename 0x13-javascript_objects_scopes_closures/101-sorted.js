@@ -1,10 +1,13 @@
 #!/usr/bin/node
-const list = require('./101-data').dict;
-const sorted = {};
+// Script imports a dictionary of occurrences by user id
+// and computes a dictionary of user ids by occurrence.
 
-Object.keys(list).forEach(key => {
-  if (sorted[list[key]] === undefined) sorted[list[key]] = [];
-  sorted[list[key]].push(key);
+const { dict } = require('./101-data.js');
+const Dictn = {};
+for (const N in dict) {
+    if (Dictn[dict[N]] === undefined) {
+	Dictn[dict[N]] = [];
+    }
+    Dictn[dict[N]].push(N);
 }
-);
-console.log(sorted);
+console.log(Dictn);
