@@ -1,11 +1,16 @@
 #!/usr/bin/node
-console.log(factorial(parseInt(process.argv[2])));
-function factorial (n) {
-  if (!n) {
-    return 1;
-  } else if (n === 0) {
-    return 1;
+
+function factorial (a) {
+  a = parseInt(a);
+  if (!isNaN(a)) {
+    if (a !== 1) {
+      const f = a * factorial(a - 1);
+      return f;
+    } else {
+      return 1;
+    }
   } else {
-    return n * factorial(n - 1);
+    return 1;
   }
 }
+console.log(factorial(process.argv[2]));
