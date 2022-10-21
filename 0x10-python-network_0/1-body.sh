@@ -1,3 +1,3 @@
 #!/bin/bash
-# script that takes a url and sends a GET request
-curl -sLf "$1"
+# Send GET request to URL and display the body
+curl -sL "$1"
