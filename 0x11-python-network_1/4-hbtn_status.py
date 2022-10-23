@@ -1,12 +1,12 @@
 #!/usr/bin/python3
+""" fetches http://alx-intranet/hbtn.io/status
+    using the requests library.
+"""
 import requests
-"""
-script that fetches url only with requests
-"""
-
 
 if __name__ == "__main__":
-    reply = requests.get('https://intranet.hbtn.io/status').text
+    r = requests.get("https://alx-intranet.hbtn.io/status")
+
     print("Body response:")
-    print("\t- type: {}".format(type(reply)))
-    print("\t- content: {}".format(reply))
+    print("\t- type: {}".format(type(r.text)))
+    print("\t- content: {}".format(r.text))

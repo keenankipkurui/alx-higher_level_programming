@@ -1,19 +1,19 @@
 #!/usr/bin/python3
+"""Sends a POST request to http://0.0.0.0:5000 """
+
 import requests
 from sys import argv
-"""
-Script that takes a letter and post request to url/search_user
-"""
-
 
 if __name__ == "__main__":
-    q = argv[1] if len(argv) > 1 else ""
+    letter = "" if len(argv) == 1 else argv[1]
+    payload = {"q": letter}
+
+    r = requests.post("http://0.0.0.0:5000/search_user", data=payload)
     try:
-        re = requests.post('http://0.0.0.0:5000/search_user',
-                           data={'q': q}).json()
-        if 'id' in re and 'name' in re:
-            print("[{}] {}".format(re['id'], re['name']))
-        else:
+        response = r.json()
+        if response == {}:
             print("No result")
+        else:
+            print("[{}] {}".format(response.get("id"), response.get("name")))
     except ValueError:
         print("Not a valid JSON")
