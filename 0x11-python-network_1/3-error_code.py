@@ -1,18 +1,16 @@
 #!/usr/bin/python3
-""" Sends a request to the URL and displays the body of the response
-    decoded in uft-8)
 """
+given URL, sends a request, displays response (utf-8).
+usage: ./3-error_code.py http://0.0.0.0:5000/status_401
+"""
+import urllib.request
 from sys import argv
-import urllib.request as req
-import urllib.parse as parse
-import urllib.error as error
+import urllib.parse
+
 
 if __name__ == "__main__":
-    url = argv[1]
-
-    request = req.Request(url)
     try:
-        with req.urlopen(request) as response:
-            print(response.read().decode("utf-8"))
-    except error.HTTPError as e:
+        with urllib.request.urlopen(argv[1]) as response:
+            print(response.read().decode())
+    except urllib.error.URLError as e:
         print("Error code: {}".format(e.code))

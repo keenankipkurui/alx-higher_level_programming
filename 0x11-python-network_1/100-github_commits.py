@@ -1,22 +1,14 @@
 #!/usr/bin/python3
-""" Lists 10 commits from the most recent to oldest of the
-    repository "rails" by the user "rails"
-    Usage:
-            ./100-github_commits.py <repo name> <owner>
 """
-import requests
-from sys import argv
-
-if __name__ == "__main__":
-    repo = argv[1]
-    owner = argv[2]
-    url = "https://api.github.com/repos/{}/{}/commits".format(owner, repo)
-
-    r = requests.get(url)
+list 10 commits (from the most recent to oldest) of the repository and user
+sent in as arguments
+"""
+if __name__ == '__main__':
+    import requests
+    from sys import argv
+    r = requests.get('https://api.github.com/repos/{}/{}/commits'
+                     .format(argv[2], argv[1]))
     commits = r.json()
-    try:
-        for i in range(10):
-            print("{}: {}".format(commits[i].get("sha"),
-                  commits[i].get("commit").get("author").get("name")))
-    except IndexError:
-        pass
+    for commit in commits[:10]:
+        print(commit.get('sha'), end=': ')
+        print(commit.get('commit').get('author').get('name'))

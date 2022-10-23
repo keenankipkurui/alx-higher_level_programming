@@ -1,18 +1,19 @@
 #!/usr/bin/python3
-"""Sends a POST request to the URL passed as argument
-    with the email as a parameter also passed as argument,
-    displays the body of the repsonse(decoded in utf-8)
 """
+given URL & email as params, send POST req to URL, display response body utf-8
+usage: ./2-post_email.py http://0.0.0.0:5000/post_email hr@holbertonschool.com
+"""
+import urllib.request
 from sys import argv
-import urllib.request as req
-import urllib.parse as parse
+import urllib.parse
+
 
 if __name__ == "__main__":
     url = argv[1]
-    values = {'email': argv[2]}
-    email = parse.urlencode(values).encode("ascii")
+    value = {'email': argv[2]}
 
-    request = req.Request(url, email)
-    with req.urlopen(request) as response:
-        page = response.read()
-        print(page.decode("utf-8"))
+    data = urllib.parse.urlencode(value)
+    data = data.encode('ascii')
+    req = urllib.request.Request(url, data)
+    with urllib.request.urlopen(req) as response:
+        print(response.read().decode())
