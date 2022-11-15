@@ -1,15 +1,22 @@
 #!/usr/bin/node
-let request = require('request');
-let api = 'https://swapi.co/api/films/';
-request.get(api + process.argv[2], function (err, response, body) {
-  if (err) throw err;
-  else if (response.statusCode === 200) {
-    let everything = JSON.parse(body);
-    for (let ch of everything.characters) {
-      request.get(ch, function (err, response, body) {
-        let everything = JSON.parse(body);
-        if (err) throw err;
-        else if (response.statusCode === 200) { console.log(everything.name); }
+// status of a request
+const myRequest = require('request');
+const myUrl = 'http://swapi.co/api/films/' + process.argv[2];
+const myRequest2 = require('request');
+myRequest(myUrl, function (err, res, body) {
+  if (err) {
+    console.log(err);
+  } else {
+    const jsonBody = JSON.parse(body).characters;
+    for (const j in jsonBody) {
+      const chars = jsonBody[j];
+      myRequest2(chars, function (err, res, body2) {
+        if (err) {
+          console.log(err);
+        } else {
+          const actor = JSON.parse(body2).name;
+          console.log(actor);
+        }
       });
     }
   }
